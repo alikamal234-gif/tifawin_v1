@@ -56,7 +56,6 @@ class CategorieController extends Controller
      */
     public function edit(Categorie $categorie)
     {
-        dd($categorie);
         return view('categories.edit',compact('categorie'));
     }
 

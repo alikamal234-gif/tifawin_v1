@@ -56,7 +56,7 @@ class ProduitController extends Controller
      */
     public function show(Produit $produit)
     {
-        $produit = $produit->with('categorie');
+        $produit = $produit->load('categorie');
 
         return view('produits.show', compact('produit'));
     }
@@ -66,7 +66,6 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-        dd($produit);
         $produit = $produit->load('categorie');
         $categories = Categorie::all();
         return view('produits.edit', compact('produit','categories'));

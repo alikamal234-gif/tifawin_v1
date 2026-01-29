@@ -1,23 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Produit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
+<body class="bg-black text-white">
 
+<header class="bg-black shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-white">
+            Tifawin<span class="text-orange-500">Souk</span>
+        </a>
 
-<form action="{{ route('produits.update',$produit) }}" method="POST">
-   @csrf
-        @method('PUT')
-    <label for="title">title :</label><br><br>
-    <input type="text" name="title" id="title" value="{{ $produit->title }}"><br><br>
+        <a href="{{ route('produits.index') }}"
+           class="border border-white px-4 py-2 rounded hover:bg-white hover:text-black transition">
+            Retour
+        </a>
+    </div>
+</header>
 
-    
-    <label for="description">description :</label><br><br>
-    <input type="text" name="description" id="description" value="{{ $produit->description }}"><br><br>
+<main class="min-h-screen bg-gray-800 flex items-center justify-center p-6">
 
-    <label for="price">price :</label><br><br>
-    <input type="number" name="price" id="price" value="{{ $produit->price }}"><br><br>
+    <div class="bg-gray-900 w-full max-w-xl p-6 rounded-lg border border-gray-700">
 
-    <select name="categorie_id" id="" value="{{ $produit->categorie_id }}"><br><br>
-        @foreach ($categories as $categorie)
-            <option value="{{ $categorie->id }}">{{ $categorie->title }}</option>
-        @endforeach
-    </select><br><br>
-    <button type="submit">update</button>
-</form>
+        <h1 class="text-2xl font-bold text-center text-orange-500 mb-6">
+            Modifier le produit
+        </h1>
+
+        <form action="{{ route('produits.update', $produit) }}"
+              method="POST"
+              enctype="multipart/form-data"
+              class="space-y-5">
+            @csrf
+            @method('PUT')
+
+            <div>
+                <label class="block mb-1 text-sm">Titre</label>
+                <input
+                    type="text"
+                    name="title"
+                    value="{{ $produit->title }}"
+                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                >
+            </div>
+
+            <div>
+                <label class="block mb-1 text-sm">Description</label>
+                <textarea
+                    name="description"
+                    rows="3"
+                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                >{{ $produit->description }}</textarea>
+            </div>
+
+            <div>
+                <label class="block mb-1 text-sm">Prix (DH)</label>
+                <input
+                    type="number"
+                    name="price"
+                    value="{{ $produit->price }}"
+                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                >
+            </div>
+
+            <div>
+                <label class="block mb-1 text-sm">Categorie</label>
+                <select
+                    name="categorie_id"
+                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                >
+                    @foreach ($categories as $categorie)
+                        <option
+                            value="{{ $categorie->id }}"
+                            {{ $produit->categorie_id == $categorie->id ? 'selected' : '' }}
+                        >
+                            {{ $categorie->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-orange-500 text-black font-semibold py-2 rounded hover:bg-orange-400 transition">
+                Mettre à jour
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+</html>
