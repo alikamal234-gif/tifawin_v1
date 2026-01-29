@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produit;
 use Illuminate\Http\Request;
 
 class CategorieController
@@ -11,7 +12,7 @@ class CategorieController
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -19,7 +20,7 @@ class CategorieController
      */
     public function create()
     {
-        //
+        
     }
 
     /**
