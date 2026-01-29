@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Categorie;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 
-class CategorieController
+class CategorieController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        $categories = Categorie::all();
+
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -20,7 +24,7 @@ class CategorieController
      */
     public function create()
     {
-        
+        return view('categories.create');
     }
 
     /**
@@ -28,38 +32,48 @@ class CategorieController
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string'
+        ]);
+
+        $data['user_id'] = 2;
+        Categorie::create($data);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Categorie $categorie)
     {
-        //
+        $categorie->load('produit');
+
+        return view('categories.show', compact('categorie'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Categorie $categorie)
     {
-        //
+        dd($categorie);
+        return view('categories.edit',compact('categorie'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Categorie $categorie)
     {
-        //
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Categorie $categorie)
     {
-        //
+        $categorie->delete();
+        return redirect()->route('categories.index');
     }
 }
