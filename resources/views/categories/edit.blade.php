@@ -1,16 +1,14 @@
 
-
-
-<form action="{{ route('categories.edit',$categorie) }}" method="POST">
+<form action="{{ route('categories.update',$category) }}" method="POST">
     @csrf
     @method('PUT')
     <label for="title">title :</label><br><br>
-    <input type="text" name="title" id="title" value="{{ $categorie->title }}"><br><br>
+    <input type="text" name="title" id="title" value="{{ $category->title }}"><br><br>
 
     
     <label for="description">description :</label><br><br>
-    <input type="text" name="description" id="description" value="{{ $categorie->description }}"><br><br>
+    <input type="text" name="description" id="description" value="{{ $category->description }}"><br><br>
 
     
-    <button type="submit">ajoute</button>
+    <button type="submit">modifier</button>
 </form>

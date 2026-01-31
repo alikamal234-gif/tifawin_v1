@@ -46,7 +46,7 @@ class CategorieController extends Controller
      */
     public function show(Categorie $categorie)
     {
-        $categorie->load('produit');
+        $categorie->load('produits');
 
         return view('categories.show', compact('categorie'));
     }
@@ -54,25 +54,33 @@ class CategorieController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categorie $categorie)
+    public function edit(Categorie $category)
     {
-        return view('categories.edit',compact('categorie'));
+        return view('categories.edit',compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, Categorie $category)
     {
-        
+        $data = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string'
+        ]);
+
+        $data['user_id'] = 2;
+        $category->update($data);
+
+        return redirect()->route('categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(Categorie $category)
     {
-        $categorie->delete();
+        $category->delete();
         return redirect()->route('categories.index');
     }
 }
