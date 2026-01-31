@@ -16,7 +16,7 @@
         </a>
 
         <a href="{{ route('produits.index') }}"
-           class="border border-white px-4 py-2 rounded hover:bg-white hover:text-black transition">
+           class="border border-white px-4 py-2 rounded ">
             Retour
         </a>
     </div>
@@ -43,7 +43,7 @@
                     type="text"
                     name="title"
                     value="{{ $produit->title }}"
-                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 "
                 >
             </div>
 
@@ -52,7 +52,7 @@
                 <textarea
                     name="description"
                     rows="3"
-                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 "
                 >{{ $produit->description }}</textarea>
             </div>
 
@@ -62,7 +62,7 @@
                     type="number"
                     name="price"
                     value="{{ $produit->price }}"
-                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 "
                 >
             </div>
 
@@ -70,7 +70,7 @@
                 <label class="block mb-1 text-sm">Categorie</label>
                 <select
                     name="categorie_id"
-                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                    class="w-full bg-black border border-gray-600 rounded px-3 py-2 "
                 >
                     @foreach ($categories as $categorie)
                         <option
@@ -85,8 +85,8 @@
 
             <button
                 type="submit"
-                class="w-full bg-orange-500 text-black font-semibold py-2 rounded hover:bg-orange-400 transition">
-                Mettre à jour
+                class="w-full bg-orange-500 text-black font-semibold py-2 rounded ">
+                modifier
             </button>
 
         </form>

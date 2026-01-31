@@ -24,7 +24,7 @@
             </nav>
 
             <a href="{{ route('produits.index') }}"
-               class="text-sm border border-white px-4 py-2 rounded hover:bg-white hover:text-black transition">
+               class="text-sm border border-white px-4 py-2 rounded">
                  Retour
             </a>
         </div>
@@ -48,7 +48,7 @@
                     <input
                         type="text"
                         name="title"
-                        class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                        class="w-full bg-black border border-gray-600 rounded px-3 py-2 "
                         required
                     >
                 </div>
@@ -57,8 +57,7 @@
                     <label class="block mb-1 text-sm">description</label>
                     <textarea
                         name="description"
-                        rows="3"
-                        class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                        class="w-full bg-black border border-gray-600 rounded px-3 py-2 "
                         required
                     ></textarea>
                 </div>
@@ -69,7 +68,7 @@
                         type="number"
                         name="price"
                         min="0"
-                        class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                        class="w-full bg-black border border-gray-600 rounded px-3 py-2 "
                         required
                     >
                 </div>
@@ -87,7 +86,7 @@
                     <label class="block mb-1 text-sm">Categorie</label>
                     <select
                         name="categorie_id"
-                        class="w-full bg-black border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-orange-500"
+                        class="w-full bg-black border border-gray-600 rounded px-3 py-2 "
                         required
                     >
                         @foreach ($categories as $categorie)
@@ -100,7 +99,7 @@
 
                 <button
                     type="submit"
-                    class="w-full bg-orange-500 text-black font-semibold py-2 rounded hover:bg-orange-400 transition">
+                    class="w-full bg-orange-500 text-black font-semibold py-2 rounded ">
                     Ajouter un produit
                 </button>
 
