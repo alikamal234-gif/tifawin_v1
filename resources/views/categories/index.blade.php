@@ -18,6 +18,9 @@
 
             <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
                 <a href="/" class="text-white hover:text-orange-500 transition">Accueil</a>
+                @if (auth()->check() && auth()->user()->isAdmin())
+                <a href="/admin/dashboard" class="text-white hover:text-orange-500 transition">Dashboard</a>
+                @endif
                 <a href="/categories" class="text-white hover:text-orange-500 transition">Catégories</a>
                 <a href="/produits" class="text-white hover:text-orange-500 transition">Produits</a>
             </nav>
@@ -36,14 +39,15 @@
     </header>
 
     <main class="p-6 bg-gray-800 min-h-screen">
-
+ @if (auth()->check() && auth()->user()->isAdmin())            
+        
         <div class="mb-6">
             <a href="{{ route('categories.create') }}"
                class="inline-block bg-orange-500 text-black px-4 py-2 ">
                 + Ajouter categorie
             </a>
         </div>
-
+        @endif
         <div class="flex flex-wrap gap-4">
 
             @foreach ($categories as $categorie)
@@ -58,8 +62,7 @@
                     </p>
 
                     <div class="flex justify-between items-center">
-
-                        <a href="{{ route('categories.edit', $categorie) }}"
+ @if (auth()->check() && auth()->user()->isAdmin())                        <a href="{{ route('categories.edit', $categorie) }}"
                            class="text-sm text-orange-400 ">
                             Edit
                         </a>
@@ -72,6 +75,9 @@
                                 Delete
                             </button>
                         </form>
+                        @endif
+
+                        
 
                     </div>
                 </div>

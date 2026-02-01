@@ -1,17 +1,17 @@
 {{-- @foreach ($produits as $produit )
-    <div>
-        <h1>{{ $produit->title }}</h1>
-        <a href="{{ route('produits.edit',$produit) }}">edit</a>
-        <form action="{{ route('produits.destroy',$produit) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit">delete</button>
-        </form>
-    </div>
+<div>
+    <h1>{{ $produit->title }}</h1>
+    <a href="{{ route('produits.edit',$produit) }}">edit</a>
+    <form action="{{ route('produits.destroy',$produit) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit">delete</button>
+    </form>
+</div>
 @endforeach
 
 <a href="{{ route('produits.create') }}">ajoute</a>
- --}}
+--}}
 
 
 <!DOCTYPE html>
@@ -36,6 +36,9 @@
                 <a href="/" class="text-white hover:text-orange-500 transition">Accueil</a>
                 <a href="/categories" class="text-white hover:text-orange-500 transition">Catégories</a>
                 <a href="/produits" class="text-white hover:text-orange-500 transition">Produits</a>
+                @if (auth()->check() && auth()->user()->isAdmin())
+                <a href="/admin/dashboard" class="text-white hover:text-orange-500 transition">Dashboard</a>
+                @endif
             </nav>
 
             <div class="flex items-center gap-3">
@@ -53,44 +56,56 @@
 
 
     <main class="p-6 bg-gray-800 min-h-screen">
+        @if (auth()->check() && auth()->user()->isAdmin())
+        <a class="bg-orange-500 p-3 m-3 text-white rounded" href="{{ route('produits.create') }}">+ Ajouter produit</a>
+        @endif
+        <div class="flex flex-wrap gap-2 m-4">
 
-    <div class="flex flex-wrap gap-2">
+            @foreach ($produits as $produit)
+                <div
+                    class="bg-gray-900 rounded-lg shadow-black  sm:w-[19%] max-w-md overflow-hidden border-2 border-white-500">
 
-        @foreach ($produits as $produit)
-            <div class="bg-gray-900 rounded-lg shadow-black  sm:w-[19%] max-w-md overflow-hidden border-2 border-white-500">
+                    <img src="https://i.pravatar.cc/1000" class="h-48 w-full object-cover">
 
-                <img
-                    src="https://i.pravatar.cc/1000"
-                    class="h-48 w-full object-cover"
-                >
+                    <div class="p-4">
+                        <h2 class="font-semibold text-white text-lg mb-1">
+                            {{ $produit->title }}
+                        </h2>
 
-                <div class="p-4">
-                    <h2 class="font-semibold text-white text-lg mb-1">
-                        {{ $produit->title }}
-                    </h2>
-
-                    <p class="text-sm text-gray-600 mb-3">
-                        {{ $produit->description }}
-                    </p>
-
-                    <div class="flex justify-between items-center">
-                        <p class="text-orange-500 font-bold text-lg">
-                            {{ $produit->price }} DH
+                        <p class="text-sm text-gray-600 mb-3">
+                            {{ $produit->description }}
                         </p>
 
-                        <a href="{{ route('produits.show', $produit) }}"
-                           class="bg-gray-900 text-white px-4 py-1.5 rounded text-sm hover:bg-gray-700 transition">
-                            Detail
-                        </a>
+                         @if (auth()->check() && auth()->user()->isAdmin())
+                            
+                        <div class="w-full flex justify-between">
+                        <a class="text-yellow-400" href="{{ route('produits.edit', $produit) }}">edit</a>
+                        <form action="{{ route('produits.destroy', $produit) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="text-red-500" type="submit">delete</button>
+                        </form>
+                        </div>
+                        @endif
+
+                        <div class="flex justify-between items-center">
+                            <p class="text-orange-500 font-bold text-lg">
+                                {{ $produit->price }} DH
+                            </p>
+
+                            <a href="{{ route('produits.show', $produit) }}"
+                                class="bg-gray-900 text-white px-4 py-1.5 rounded text-sm hover:bg-gray-700 transition">
+                                Detail
+                            </a>
+                        </div>
                     </div>
+
                 </div>
+            @endforeach
 
-            </div>
-        @endforeach
+        </div>
 
-    </div>
-
-</main>
+    </main>
 
 
 
